@@ -3,15 +3,13 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { UrdfViewerComponent } from './urdf-viewer/urdf-viewer.component';
-import { RosoutLogComponent } from './rosout-log/rosout-log.component';
+import { BasicRosFunctinalityComponent } from './basic-ros-functinality/basic-ros-functinality.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    UrdfViewerComponent,
-    RosoutLogComponent
+    BasicRosFunctinalityComponent,
   ],
   imports: [
     BrowserModule

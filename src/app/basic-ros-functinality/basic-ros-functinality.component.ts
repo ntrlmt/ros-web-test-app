@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Ros, Topic, Message, Service, ServiceRequest, ServiceResponse, Param } from 'roslib';
+// import { Ros, Topic, Message, Service, ServiceRequest, ServiceResponse, Param } from 'roslib';
+import * as ROSLIB from 'roslib';
 
 @Component({
   selector: 'app-basic-ros-functinality',
@@ -8,11 +9,11 @@ import { Ros, Topic, Message, Service, ServiceRequest, ServiceResponse, Param } 
   styleUrls: ['./basic-ros-functinality.component.css']
 })
 export class BasicRosFunctinalityComponent implements OnInit {
-  private ros: Ros;
+  private ros: ROSLIB.Ros;
   connected: boolean = false;
-  private listener: Topic;
+  private listener: ROSLIB.Topic;
   subscribeMessage: string;
-  private addTwoIntsClient: Service;
+  private addTwoIntsClient: ROSLIB.Service;
   num: number;
   constructor() { }
 
@@ -49,7 +50,7 @@ export class BasicRosFunctinalityComponent implements OnInit {
   }
 
   connect() {
-    this.ros = new Ros({
+    this.ros = new ROSLIB.Ros({
       url: 'ws://localhost:9090'
     });
 
@@ -66,13 +67,13 @@ export class BasicRosFunctinalityComponent implements OnInit {
 
   publishTopic() {
     if (this.connected) {
-      let cmdVel = new Topic({
+      let cmdVel = new ROSLIB.Topic({
         ros: this.ros,
         name: '/cmd_vel',
         messageType: 'geometry_msgs/Twist'
       });
 
-      let twist = new Message({
+      let twist = new ROSLIB.Message({
         linear: {
           x: 0.1,
           y: 0.2,
@@ -90,7 +91,7 @@ export class BasicRosFunctinalityComponent implements OnInit {
 
   subscribeTopic() {
     if(this.connected){
-      this.listener = new Topic({
+      this.listener = new ROSLIB.Topic({
         ros: this.ros,
         name: '/listener',
         messageType: 'std_msgs/String'
@@ -102,13 +103,13 @@ export class BasicRosFunctinalityComponent implements OnInit {
 
   callService() {
     if(this.connected){
-      this.addTwoIntsClient = new Service({
+      this.addTwoIntsClient = new ROSLIB.Service({
         ros: this.ros,
         name: '/add_two_ints',
         serviceType: 'rospy_tutorials/AddTwoInts'
       });
   
-      let request = new ServiceRequest({
+      let request = new ROSLIB.ServiceRequest({
         a: 1,
         b: 2
       });
@@ -123,7 +124,7 @@ export class BasicRosFunctinalityComponent implements OnInit {
         console.log(params);
       });
   
-      var maxVelX = new Param({
+      var maxVelX = new ROSLIB.Param({
         ros: this.ros,
         name: 'max_vel_y'
       });

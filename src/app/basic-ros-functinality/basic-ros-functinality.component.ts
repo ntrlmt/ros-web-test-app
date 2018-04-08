@@ -9,6 +9,8 @@ import { Ros, Topic, Message } from 'roslib';
 })
 export class BasicRosFunctinalityComponent implements OnInit {
   private ros: Ros = undefined;
+  private listener: Topic = undefined;
+  subscribeMessage: string;
   connected: boolean = false;
   constructor() { }
 
@@ -28,6 +30,12 @@ export class BasicRosFunctinalityComponent implements OnInit {
   private closeEvent = () => {
     console.log('Connection to websocket server closed.');
     this.connected = false;
+  }
+
+  private subscribeEvent = (message) => {
+    console.log('Received message on ' + this.listener.name + ': ' + message.data);
+    this.subscribeMessage = message.data;
+    this.listener.unsubscribe();
   }
 
   connect() {
@@ -68,6 +76,16 @@ export class BasicRosFunctinalityComponent implements OnInit {
       });
       cmdVel.publish(twist);
     }
+  }
+
+  subscribeTopic(){
+    this.listener = new Topic({
+      ros : this.ros,
+      name : '/listener',
+      messageType : 'std_msgs/String'
+    });
+  
+    this.listener.subscribe(this.subscribeEvent);  
   }
 
 }

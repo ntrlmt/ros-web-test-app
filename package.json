@@ -8,7 +8,8 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "packagr": "ng-packagr -p ng-package.json"
   },
   "private": true,
   "dependencies": {
@@ -21,11 +22,15 @@
     "@angular/platform-browser": "^5.0.0",
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
+    "@types/eventemitter2": "^4.1.0",
     "@types/roslib": "^0.18.3",
+    "@types/three": "^0.91.7",
     "core-js": "^2.4.1",
     "ros3d": "^0.18.0",
     "roslib": "^0.20.0",
     "rxjs": "^5.5.2",
+    "three": "^0.91.0",
+    "three-collada-loader-2": "^1.0.1",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
@@ -44,6 +49,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "^2.4.2",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
